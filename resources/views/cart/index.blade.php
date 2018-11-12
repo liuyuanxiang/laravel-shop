@@ -180,7 +180,10 @@
                             });
                             html += '</div>';
                             swal({content: $(html)[0], icon: 'error'})
-                        } else {
+                        } else if(error.response.status === 403){
+                            // 如果返回码是 403，说明有其他条件不满足
+                            swal(error.response.data.msg, '', 'error');
+                        }else{
                             // 其他情况应该是系统挂了
                             swal('系统错误', '', 'error');
                         }
