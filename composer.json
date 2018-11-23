@@ -7,7 +7,7 @@
     "require": {
         "php": ">=7.0.0",
         "barryvdh/laravel-debugbar": "^3.2",
-        "encore/laravel-admin": "1.5.*",
+        "encore/laravel-admin": "1.6.0",
         "endroid/qr-code": "^3.4",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
