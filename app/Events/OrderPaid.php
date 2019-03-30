@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
@@ -10,22 +11,24 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\Models\Order;
 
+
 class OrderPaid
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     protected $order;
+
     /**
-     * Create a new event instance.
-     *
-     * @return void
+     * OrderPaid constructor.
+     * @param Order $order
      */
     public function __construct(Order $order)
     {
         $this->order = $order;
     }
 
-    public function getOrder(){
+    public function getOrder()
+    {
         return $this->order;
     }
 }

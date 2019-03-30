@@ -16,11 +16,6 @@ class CloseOrder implements ShouldQueue
 
     protected $order;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
     public function __construct(Order $order, $delay)
     {
         $this->order = $order;
@@ -46,8 +41,7 @@ class CloseOrder implements ShouldQueue
                 $item->productSku->addStock($item->amount);
             }
 
-            // 减少该优惠券的用量
-            if ($this->order->couponCode){
+            if ($this->order->couponCode) {
                 $this->order->couponCode->changeUsed(false);
             }
         });

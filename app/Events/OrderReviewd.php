@@ -11,17 +11,12 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\Models\Order;
 
-class OrderReviewed
+class OrderReviewd
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     protected $order;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
     public function __construct(Order $order)
     {
         $this->order = $order;

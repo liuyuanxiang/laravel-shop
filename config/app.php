@@ -91,11 +91,9 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'zh_CN',
 
     'faker_locale' => 'zh_CN',
-
-    'order_ttl' => '30',
 
     /*
     |--------------------------------------------------------------------------
@@ -129,6 +127,8 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
+    // 订单关闭时间
+    'order_ttl' => 1800,
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

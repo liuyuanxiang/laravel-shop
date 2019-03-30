@@ -3,49 +3,49 @@
 return [
 
     /*
-     * 站点标题
+     * Laravel-admin name.
      */
     'name' => 'Laravel Shop',
 
     /*
-     * 页面顶部 Logo
+     * Logo in admin panel header.
      */
     'logo' => '<b>Laravel</b> Shop',
 
     /*
-     * 页面顶部小 Logo
+     * Mini-logo in admin panel header.
      */
     'logo-mini' => '<b>LS</b>',
 
     /*
-     * 路由配置
+     * Route configuration.
      */
     'route' => [
-        // 路由前缀
+
         'prefix' => 'admin',
-        // 控制器命名空间前缀
+
         'namespace' => 'App\\Admin\\Controllers',
-        // 默认中间件列表
+
         'middleware' => ['web', 'admin'],
     ],
 
     /*
-     * Laravel-Admin 的安装目录
+     * Laravel-admin install directory.
      */
     'directory' => app_path('Admin'),
 
     /*
-     * Laravel-Admin 页面标题
+     * Laravel-admin html title.
      */
     'title' => 'Laravel Shop 管理后台',
 
     /*
-     * 是否使用 https
+     * Use `https`.
      */
     'secure' => false,
 
     /*
-     * Laravel-Admin 用户认证设置
+     * Laravel-admin auth setting.
      */
     'auth' => [
         'guards' => [
@@ -64,10 +64,10 @@ return [
     ],
 
     /*
-     * Laravel-Admin 文件上传设置
+     * Laravel-admin upload setting.
      */
     'upload' => [
-        // 对应 filesystem.php 中的 disks
+
         'disk' => 'public',
 
         'directory' => [
@@ -77,30 +77,30 @@ return [
     ],
 
     /*
-     * Laravel-Admin 数据库设置
+     * Laravel-admin database setting.
      */
     'database' => [
 
-        // 数据库连接名称，留空即可
+        // Database connection for following tables.
         'connection' => '',
 
-        // 管理员用户表及模型
+        // User tables and model.
         'users_table' => 'admin_users',
         'users_model' => Encore\Admin\Auth\Database\Administrator::class,
 
-        // 角色表及模型
+        // Role table and model.
         'roles_table' => 'admin_roles',
         'roles_model' => Encore\Admin\Auth\Database\Role::class,
 
-        // 权限表及模型
+        // Permission table and model.
         'permissions_table' => 'admin_permissions',
         'permissions_model' => Encore\Admin\Auth\Database\Permission::class,
 
-        // 菜单表及模型
+        // Menu table and model.
         'menu_table' => 'admin_menu',
         'menu_model' => Encore\Admin\Auth\Database\Menu::class,
 
-        // 多对多关联中间表
+        // Pivot table for table above.
         'operation_log_table'    => 'admin_operation_log',
         'user_permissions_table' => 'admin_user_permissions',
         'role_users_table'       => 'admin_role_users',
@@ -109,14 +109,17 @@ return [
     ],
 
     /*
-     * Laravel-Admin 操作日志设置
+     * By setting this option to open or close operation log in laravel-admin.
      */
     'operation_log' => [
 
         'enable' => true,
 
         /*
-         * 不记操作日志的路由
+         * Routes that will not log to database.
+         *
+         * All method to path like: admin/auth/logs
+         * or specific method to path like: get:admin/auth/logs
          */
         'except' => [
             'admin/auth/logs*',
@@ -124,7 +127,6 @@ return [
     ],
 
     /*
-     * 页面风格
      * @see https://adminlte.io/docs/2.4/layout
      */
     'skin' => 'skin-blue-light',
@@ -138,15 +140,20 @@ return [
     |               | sidebar-mini                            |
     |---------------------------------------------------------|
      */
-    'layout' => ['sidebar-mini', 'sidebar-collapse'],
+    'layout' => ['fixed'],
 
     /*
-     * 页面底部展示的版本.
+     * Background image in login page
+     */
+    'login_background_image' => '',
+
+    /*
+     * Version displayed in footer.
      */
     'version' => '1.5.x-dev',
 
     /*
-     * 扩展设置.
+     * Settings for extensions.
      */
     'extensions' => [
 

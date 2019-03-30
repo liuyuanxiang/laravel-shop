@@ -7,6 +7,7 @@ $factory->define(App\Models\CouponCode::class, function (Faker $faker) {
     $type  = $faker->randomElement(array_keys(App\Models\CouponCode::$typeMap));
     // 根据取得的类型生成对应折扣
     $value = $type === App\Models\CouponCode::TYPE_FIXED ? random_int(1, 200) : random_int(1, 50);
+
     // 如果是固定金额，则最低订单金额必须要比优惠金额高 0.01 元
     if ($type === App\Models\CouponCode::TYPE_FIXED) {
         $minAmount = $value + 0.01;

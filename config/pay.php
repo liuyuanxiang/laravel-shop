@@ -2,21 +2,21 @@
 
 return [
     'alipay' => [
-        'app_id'         => '2016092000552986',
-        'ali_public_key' => 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnZwL9RgAATInxXgmsyj0eCG6X5ueRuvJIgVlMjs8+VyF0YAWA2kGFC6dq8uhAe7/wqv8N5RPjCRY1XlC5Ce1bg72nM20AKr76Rf6ZUK+9pBMyOg3UVTz9hjCOcZwffnNL81rh+nXgs8ooJ5EuEGpYHFvOWcodUQAbgCBz21ovKT+mJ3tOPwh/seIUS/lLAmpmSHsM3r8BSnZsUCfKaP0qoTQbc2YTyzOXr1qv5x21vCdbqJ5NStuxAkqjPtlZXd/d6Xei5t1QrXmENUqR49R6p8ftGb1lFXCfuiA8xY8ITDIkMnc+hUo4+KBThD7QU6W8qyRhtMW3R+hxnHV25VaFQIDAQAB',
-        'private_key'    => 'MIIEpgIBAAKCAQEAtbTDJ+nawf6Yl2vLkxsRkkgOeDaiCcNMVpm4ZZVTB3jomGecrBQjF7uyDUWpjHNCGAuyEdCCVHRulENkyMcCdag1zosQLRussHc4cS0njha5woOagxR7pb37VajFxy3g+JG6vuo6wSASn0GgpQNkNZ930iN3pUDotgumeVse5qWKNbOWNIkQwdMnWzQKl9EMLXrjZEbyZDDbsjWx6eOBE+uJv2MmM9xFfp6qDgtQ+nOwv8j9wAax/+H43Ac5hsHph6mdWAs07PjFSG+BhJU4Huqk3uxbqhuWUq343+PELeRhqGeV717MJJQ+H/RfWpHpgzT3na0xr5RxhazKcQNH6wIDAQABAoIBAQCm0UBFuX17koh2o6Eu+a/lE0Atf0K+Ic1IyDGxGSkz9/3aRW1h0c7x8ACkDKt+5SXtu3cMwdeVP5txhHnXllUcvYRAjg0YzIp7K8jmpqTk3tpFyNqmsrxdypAe8SY6GVWr/uZqddHhEdfm27JnLDjovfGcO7GRRoke8I0yZsR0zENfGo52lCyAxp4Es6uhvRJjTkGDACldnITpV60b0DI4gP6VNGicMkbZ4QTi2jEtBXBvyM+AFa0D/EfCXS0UvujJWbYae80m7teTP+pkQPOJtO6w1Og0ld23kfy0RxB5PucWeP+F628khi8tMkkz5qgyfOtdw+uBDpZFtGfpwNlZAoGBAN7d/giLZzHXmq+Ptt853VGJj6HFwZqzAhTF62nBpWopOb48yel0xHXTYJRuztzv8PBhWtd82KW2FJLgOqS2gUQpIlGcG4CJx1tGko8/n3E4ARnlAZzr6KU55pw8HuuswTL6AChtH3TJvHXIv6NP8atse5pm9HftbLuPtgT283sHAoGBANC4PRr61cGAZOKK9RTpnRmtv8btD+L2RM+AVqlW7NfwKlEV0vRrnjvRP0XGP5A9ukq+SUEyJrzfmcV8ELqa7C95uSS3cHyors5MHtRfz5C1svBkFtz62v9er9CDtJ+Fw9wv6GD1GAST0nYIoVQmkn2TCoEVUNSGjrKIz+Nf8T79AoGBAKD3KRE2zjO7iyed3vDfNDA98JVg5XI8NBaY1Gyvxi8k02XJNfP9uB95qdnLJnGAgz66sgfNThRxq+5hMTnh7v8xzm2vGFYALRKJqDT6OMhnMLRpKH8UDBW5+guBiLujLG8LDa4lEoEha5KOiYsEpIGxepyMG6m6u7vEEi0Hx9dlAoGBAJCWkP4XteyOXVTynkUWcNZRHwFXSCIaKCD27xHwPbJ5lVcGn1TjGIKnugVECNSLbnpIx8Z6T4uX+pZsE8qxd9yLnk5pJWu2DyKqaNEGbmv48zTEoXID9aHinjj8hCveJohqR7ijEThajvllkR0Se3iyXBx//7a6YDAdxqXk2OKhAoGBAL0PG6LU9EAcG1jW1Ww6GARWcOpeX/OM+byX+/SOGMkisRaUlsQKMnjwAh5xP4SFPSIbxUkkMvyPwH1u6uOS0jGndtDRdMO5HZQHvG3aKt/XMgVXpHXKlEzizoxgLpMkv4kMSU1DU5v59aQ40HiU6kFHHH0mG3hnfb/mNKqn2CpX',
-        'log'            => [
+        'app_id' => '2016081600259828',
+        'ali_public_key' => 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs5YOVM0IsGqSaG7BS8/o+oXWcwblqy45Ro/YGDCE2z4JAWDhhi+PCxI8I6xZgZ/b5g4FZDLQRoqnlwGd5hSvqJU3JXpWiM8BGS7UL1KVm6qRlnts/BbEjim1+GES1ib8J7AWpRp/7Brgyk6SMcH/LXCVbR8kZYQLOAPqIpNdacyBNJEiNWjOUeSXXgqEfvfe2uQzlqcDl8yrQd6FlSjDG8SCSF4irg8BHyB6bmxKgapGZaBNJjmASlW7QasYk9ZMOeSLA4Kkwu7L3qWpEzt8RYuxDcmRqeJNaCkebVd6K56OAtU+m8hSK/ZaCPKvFeouKhUfrVLA0iUBUFfHhJlB6QIDAQAB',
+        'private_key' => 'MIIEpAIBAAKCAQEA7H3yPJbZy9Z27Adp3EaoGHmj+9Pv8xq+NDJBBLfF5YFSdgJWtKxdlfQQfL1ECFmBisob/71qXVWSZX8Fe8jv3h7GeOeFjlE/vJncTWMZnqR/OMJ4YwoKtvrqxtpX/jhFjAxlM55GC9CG15aDWGyTJvIF882w/TOYZqBNb3kTd9jDRL4LDh0NrYXUft1+lwlFl/zgvOQK/mRxz5wILlUVyb3D15VnC62k/xYU14vI7GDoLEztMKb6bukzcJGJSPt8ClmQOlcoJD5bCGYpygdLFHYAC0lIUWoFzNXeL7Bz+FrT8PyxK2T8Q5mPxncWY/2gTc4876aGFeXaEpdj8CPRHQIDAQABAoIBAQCqBsr4AMTJpoGNpK7ZbftAzYO2dGOZduq1AER6rd2b6eRtb7UC5MHMI9MOu8yD7EYUkMackYQ9Yl6EllRM8ORz39B18I63CXc3k68t/EfZJQ9KsZZ4LioR8EiHe0e0QKTP0cGY4PwfVmb77Py1wCnz4CGjbYkIIeY6Mpo5wOTcThwJNoPUP6AQED13qUNT+93nTp9c8FIl8XuluNbV5VSILskt+uavFvSyUIOOZdLHZFeQb20p54zlrDavDudm87g0FBJ+8zc4rRB9LBDrIhfpybh6ppw2X37MkOjqDSooCbjHwXCAUFu/NMDBeM4VIlB+cUHsVTHl4QHhCeesu2sJAoGBAPp8rGNpzBPiAA1p4+abdI6tgq5zYybjZsjcQt83WdB3wCXiEiZqIY3y3pDDw7oRpMWuxWRs56qS17o+wDHjEE20rxDTm8xK39P2TzXlMAEQnI3bIj6/p8OxY/IxSHwgFrPJS3wa8T6bPphOrvR/ZAJuT+A/tCviuM/qkHkdhQrHAoGBAPGya5Q4NclX/XN/pVSrfVHlZl9igjX4kXzhi+ysohakIg4pIJqw9/CH0JoAJj20Fo8mRHKZ18SJJCaU8VRS3/Bdcd68qhdb8s2lbyS1uBNILczKIidZQWYbZzMZDMmfrMZbxft5Wd4mfTIiTz8wXm4GQVLo6a4EWRUOFxqve8D7AoGANvcWqPX1R0OneUoMLXVdXVWrwHYngsgRrO/QaMTvm3Q7oNR74RwW4twxhJjAoVrvykUwoXnYWDDCz+anLAtEb5i/dbTJkkm31f5NoWj6YLFxeRtl51kNCj8pzGKOIla0RJ1eSAxtdayBTtCtSY+OtY3ZTz8LXTnyDgXN0BXvNM8CgYA/P4+DZAo/PDVpChg7xfyvd7aIc4DbmsaHxYYWUz6/agg3aG/Ny022tfPSuQNI1l2o7DyxOK0ME09QgV190Yoknm9z+C8Smc86HXauRpd7BEJn+uVhIqxIihdBeeasxIo0BkQTALiRt8S/X9cZFBFB/YUOq0CrdxvQtLU7GHzsDQKBgQDAc9CT3WLDhBG18DQpEO81x2wSodEUOfty7qK9PUfwVLrqgInd9JEMadYcKcpdC61n2awZBRfz4BlSwa8qG6IOy+xpA/VS8zrrg3lFhlWquai95AFm4gev1J7ArXHenWwaPe4XW65/1lNGBPAXe6jUVwqE/E8lbELmyrnl2IOcyA==',
+        'log' => [
             'file' => storage_path('logs/alipay.log'),
         ],
     ],
 
     'wechat' => [
-        'app_id'      => 'wx*******',   // 公众号 app id
-        'mch_id'      => '14*****',  // 第一步获取到的商户号
-        'key'         => '******', // 刚刚设置的 API 密钥
-        'cert_client' => resource_path('wechat_pay/apiclient_cert.pem'),
-        'cert_key'    => resource_path('wechat_pay/apiclient_key.pem'),
-        'log'         => [
+        'app_id' => '',
+        'mch_id' => '',
+        'key' => '',
+        'cert_client' => '',
+        'cert_key' => '',
+        'log' => [
             'file' => storage_path('logs/wechat_pay.log'),
         ],
     ],

@@ -87,14 +87,9 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function couponCode()
-    {
-        return $this->belongsTo(CouponCode::class);
-    }
-
     public static function findAvailableNo()
     {
-        // 订单流水号前缀5   554564545445
+        // 订单流水号前缀
         $prefix = date('YmdHis');
         for ($i = 0; $i < 10; $i++) {
             // 随机生成 6 位的数字
@@ -118,5 +113,10 @@ class Order extends Model
         } while (self::query()->where('refund_no', $no)->exists());
 
         return $no;
+    }
+
+    public function couponCode()
+    {
+        return $this->belongsTo(CouponCode::class);
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Admin\Controllers;
 
 use App\Models\Category;
@@ -8,19 +7,12 @@ use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
-use Encore\Admin\Show;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
     use HasResourceActions;
 
-    /**
-     * Index interface.
-     *
-     * @param Content $content
-     * @return Content
-     */
     public function index(Content $content)
     {
         return $content
@@ -28,13 +20,6 @@ class CategoriesController extends Controller
             ->body($this->grid());
     }
 
-    /**
-     * Edit interface.
-     *
-     * @param mixed $id
-     * @param Content $content
-     * @return Content
-     */
     public function edit($id, Content $content)
     {
         return $content
@@ -42,12 +27,6 @@ class CategoriesController extends Controller
             ->body($this->form(true)->edit($id));
     }
 
-    /**
-     * Create interface.
-     *
-     * @param Content $content
-     * @return Content
-     */
     public function create(Content $content)
     {
         return $content
@@ -55,13 +34,9 @@ class CategoriesController extends Controller
             ->body($this->form(false));
     }
 
-    /**
-     * Make a grid builder.
-     *
-     * @return Grid
-     */
     protected function grid()
     {
+        // Laravel-Admin 1.5.19 之后的新写法，原写法也仍然可用
         $grid = new Grid(new Category);
 
         $grid->id('ID')->sortable();
@@ -79,19 +54,15 @@ class CategoriesController extends Controller
         return $grid;
     }
 
-    /**
-     * Make a form builder.
-     *
-     * @return Form
-     */
     protected function form($isEditing = false)
     {
+        // Laravel-Admin 1.5.19 之后的新写法，原写法也仍然可用
         $form = new Form(new Category);
 
         $form->text('name', '类目名称')->rules('required');
 
-        //编辑
-        if ($isEditing){
+        // 如果是编辑的情况
+        if ($isEditing) {
             // 不允许用户修改『是否目录』和『父类目』字段的值
             // 用 display() 方法来展示值，with() 方法接受一个匿名函数，会把字段值传给匿名函数并把返回值展示出来
             $form->display('is_directory', '是否目录')->with(function ($value) {
@@ -99,7 +70,7 @@ class CategoriesController extends Controller
             });
             // 支持用符号 . 来展示关联关系的字段
             $form->display('parent.name', '父类目');
-        }else{
+        } else {
             // 定义一个名为『是否目录』的单选框
             $form->radio('is_directory', '是否目录')
                 ->options(['1' => '是', '0' => '否'])
@@ -119,7 +90,7 @@ class CategoriesController extends Controller
         // 用户输入的值通过 q 参数获取
         $search = $request->input('q');
         $result = Category::query()
-            ->where('is_directory', boolval($request->input('is_directory', true)))  // 由于这里选择的是父类目，因此需要限定 is_directory 为 true
+            ->where('is_directory', boolval($request->input('is_directory', true)))
             ->where('name', 'like', '%'.$search.'%')
             ->paginate();
 
@@ -130,5 +101,4 @@ class CategoriesController extends Controller
 
         return $result;
     }
-
 }

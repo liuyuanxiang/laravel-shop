@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 class UserAddressRequest extends Request
 {
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,6 +21,7 @@ class UserAddressRequest extends Request
             'contact_phone' => 'required',
         ];
     }
+
     public function attributes()
     {
         return [
@@ -34,5 +34,4 @@ class UserAddressRequest extends Request
             'contact_phone' => '电话',
         ];
     }
-
 }

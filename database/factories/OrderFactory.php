@@ -5,7 +5,7 @@ use App\Models\Order;
 use App\Models\User;
 use Faker\Generator as Faker;
 
-$factory->define(Order::class, function (Faker $faker) {
+$factory->define(App\Models\Order::class, function (Faker $faker) {
     // 随机取一个用户
     $user = User::query()->inRandomOrder()->first();
     // 随机取一个该用户的地址

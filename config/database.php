@@ -106,7 +106,7 @@ return [
 
     'redis' => [
 
-        'client' => 'predis',
+        'client' => 'phpredis',
 
         'default' => [
             'host' => env('REDIS_HOST', '127.0.0.1'),
@@ -115,6 +115,9 @@ return [
             'database' => 0,
         ],
 
+        'options' => [
+            'prefix' => 'larashop:',
+        ],
     ],
 
 ];

@@ -2,16 +2,16 @@
 
 namespace App\Listeners;
 
-use DB;
-use App\Models\OrderItem;
-use App\Events\OrderReviewed;
+use App\Events\OrderReviewd;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use DB;
+use App\Models\OrderItem;
+
 
 class UpdateProductRating implements ShouldQueue
 {
-
-    public function handle(OrderReviewed $event)
+    public function handle(OrderReviewd $event)
     {
         // 通过 with 方法提前加载数据，避免 N + 1 性能问题
         $items = $event->getOrder()->items()->with(['product'])->get();

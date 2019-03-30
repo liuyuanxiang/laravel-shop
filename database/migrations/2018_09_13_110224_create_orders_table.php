@@ -19,13 +19,13 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('address');
-            $table->decimal('total_amount', 10, 2);
+            $table->decimal('total_amount');
             $table->text('remark')->nullable();
             $table->dateTime('paid_at')->nullable();
             $table->string('payment_method')->nullable();
             $table->string('payment_no')->nullable();
             $table->string('refund_status')->default(\App\Models\Order::REFUND_STATUS_PENDING);
-            $table->string('refund_no')->unique()->nullable();
+            $table->string('refund_no')->nullable();
             $table->boolean('closed')->default(false);
             $table->boolean('reviewed')->default(false);
             $table->string('ship_status')->default(\App\Models\Order::SHIP_STATUS_PENDING);

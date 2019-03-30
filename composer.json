@@ -6,17 +6,17 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
-        "barryvdh/laravel-debugbar": "^3.2",
         "encore/laravel-admin": "1.6.0",
-        "endroid/qr-code": "^3.4",
         "fideloper/proxy": "~3.3",
+        "hhxsv5/laravel-s": "~3.0",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "overtrue/laravel-lang": "^3.0",
         "predis/predis": "^1.1",
-        "yansongda/pay": "^2.5"
+        "yansongda/pay": "^2.4"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.5",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "~1.0",
@@ -56,6 +56,11 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta"
         ]
     },
     "config": {

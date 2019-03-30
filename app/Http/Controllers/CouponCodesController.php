@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CouponCode;
-use Illuminate\Http\Request;
 use App\Exceptions\CouponCodeUnavailableException;
-
+use App\Http\Requests\Request;
+use App\Models\CouponCode;
 
 class CouponCodesController extends Controller
 {
-    public function show($code,Request $request){
-        // 判断优惠券是否存在
+    public function show($code, Request $request)
+    {
         if (!$record = CouponCode::where('code', $code)->first()) {
             throw new CouponCodeUnavailableException('优惠券不存在');
         }

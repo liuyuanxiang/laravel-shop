@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CouponCodeUnavailableException;
+use App\Http\Requests\ApplyRefundRequest;
 use App\Http\Requests\OrderRequest;
+use App\Models\CouponCode;
 use App\Models\UserAddress;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -10,29 +13,10 @@ use App\Services\OrderService;
 use App\Exceptions\InvalidRequestException;
 use Carbon\Carbon;
 use App\Http\Requests\SendReviewRequest;
-use App\Events\OrderReviewed;
-use App\Http\Requests\ApplyRefundRequest;
-use App\Exceptions\CouponCodeUnavailableException;
-use App\Models\CouponCode;
+use App\Events\OrderReviewd;
 
 class OrdersController extends Controller
 {
-    public function store(OrderRequest $request, OrderService $orderService)
-    {
-        $user = $request->user();
-        $address = UserAddress::find($request->input('address_id'));
-        $coupon = null;
-
-        if ($code = $request->input('coupon_code')){
-            $coupon = CouponCode::where('code',$code)->first();
-            if (!$coupon){
-                throw new CouponCodeUnavailableException('优惠券不存在');
-            }
-        }
-
-        return $orderService->store($user, $address, $request->input('items'), $request->input('remark'),$coupon);
-    }
-
     public function index(Request $request)
     {
         $orders = Order::query()
@@ -45,10 +29,26 @@ class OrdersController extends Controller
         return view('orders.index', ['orders' => $orders]);
     }
 
-    public function show(Order $order, Request $request)
+    public function show(Order $order)
     {
         $this->authorize('own', $order);
         return view('orders.show', ['order' => $order->load(['items.productSku', 'items.product'])]);
+    }
+
+    public function store(OrderRequest $request, OrderService $orderService)
+    {
+        $user    = $request->user();
+        $address = UserAddress::find($request->input('address_id'));
+        $coupon  = null;
+
+        // 如果用户提交了优惠码
+        if ($code = $request->input('coupon_code')) {
+            $coupon = CouponCode::where('code', $code)->first();
+            if (!$coupon) {
+                throw new CouponCodeUnavailableException('优惠券不存在');
+            }
+        }
+        return $orderService->store($user, $address, $request->input('remark'), $request->input('items'), $coupon);
     }
 
     public function received(Order $order, Request $request)
@@ -64,9 +64,7 @@ class OrdersController extends Controller
         // 更新发货状态为已收到
         $order->update(['ship_status' => Order::SHIP_STATUS_RECEIVED]);
 
-//        // 返回原页面
-//        return redirect()->back();
-        // 返回订单信息
+        // 返回订单
         return $order;
     }
 
@@ -101,14 +99,14 @@ class OrdersController extends Controller
                 $orderItem = $order->items()->find($review['id']);
                 // 保存评分和评价
                 $orderItem->update([
-                    'rating' => $review['rating'],
-                    'review' => $review['review'],
+                    'rating'      => $review['rating'],
+                    'review'      => $review['review'],
                     'reviewed_at' => Carbon::now(),
                 ]);
             }
             // 将订单标记为已评价
             $order->update(['reviewed' => true]);
-            event(new OrderReviewed($order));
+            event(new OrderReviewd($order));
         });
 
         return redirect()->back();
@@ -118,25 +116,21 @@ class OrdersController extends Controller
     {
         // 校验订单是否属于当前用户
         $this->authorize('own', $order);
-
         // 判断订单是否已付款
         if (!$order->paid_at) {
             throw new InvalidRequestException('该订单未支付，不可退款');
         }
-
         // 判断订单退款状态是否正确
         if ($order->refund_status !== Order::REFUND_STATUS_PENDING) {
             throw new InvalidRequestException('该订单已经申请过退款，请勿重复申请');
         }
-
-        // 将用户输入的退款理由的 extra
-        $extra = $order->extra ?: [];
+        // 将用户输入的退款理由放到订单的 extra 字段中
+        $extra                  = $order->extra ?: [];
         $extra['refund_reason'] = $request->input('reason');
-
         // 将订单退款状态改为已申请退款
         $order->update([
             'refund_status' => Order::REFUND_STATUS_APPLIED,
-            'extra' => $extra
+            'extra'         => $extra,
         ]);
 
         return $order;

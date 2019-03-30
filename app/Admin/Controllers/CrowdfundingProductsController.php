@@ -26,6 +26,7 @@ class CrowdfundingProductsController extends Controller
     {
         return $content
             ->header('众筹商品列表')
+            ->description('description')
             ->body($this->grid());
     }
 
@@ -73,7 +74,6 @@ class CrowdfundingProductsController extends Controller
             return $value ? '是' : '否';
         });
         $grid->price('价格');
-
         // 展示众筹相关字段
         $grid->column('crowdfunding.target_amount', '目标金额');
         $grid->column('crowdfunding.end_at', '结束时间');
@@ -91,7 +91,6 @@ class CrowdfundingProductsController extends Controller
                 $batch->disableDelete();
             });
         });
-
         return $grid;
     }
 
@@ -113,11 +112,9 @@ class CrowdfundingProductsController extends Controller
                 return [$category->id => $category->full_name];
             }
         })->ajax('/admin/api/categories?is_directory=0');
-
         $form->image('image', '封面图片')->rules('required|image');
         $form->editor('description', '商品描述')->rules('required');
         $form->radio('on_sale', '上架')->options(['1' => '是', '0' => '否'])->default('0');
-
         // 添加众筹相关字段
         $form->text('crowdfunding.target_amount', '众筹目标金额')->rules('required|numeric|min:0.01');
         $form->datetime('crowdfunding.end_at', '众筹结束时间')->rules('required|date');
@@ -127,7 +124,6 @@ class CrowdfundingProductsController extends Controller
             $form->text('price', '单价')->rules('required|numeric|min:0.01');
             $form->text('stock', '剩余库存')->rules('required|integer|min:0');
         });
-
         $form->saving(function (Form $form) {
             $form->model()->price = collect($form->input('skus'))->where(Form::REMOVE_FLAG_NAME, 0)->min('price');
         });

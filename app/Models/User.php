@@ -15,11 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'email_verified',
-    ];
-
-    protected $casts = [
-        'email_verified' => 'boolean',
+        'name', 'email', 'password', 'email_verified'
     ];
 
     /**
@@ -28,8 +24,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-
         'password', 'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified' => 'boolean',
     ];
 
     public function addresses()

@@ -5,28 +5,59 @@ namespace App\Admin\Controllers;
 use App\Models\CouponCode;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
-use Encore\Admin\Facades\Admin;
 
 class CouponCodesController extends Controller
 {
     use HasResourceActions;
 
+    public function index()
+    {
+        return Admin::content(function (Content $content) {
+            $content->header('优惠券列表');
+            $content->body($this->grid());
+        });
+    }
+
     /**
-     * Index interface.
+     * Show interface.
      *
+     * @param mixed   $id
      * @param Content $content
      * @return Content
      */
-    public function index(Content $content)
+    public function show($id, Content $content)
     {
         return $content
-            ->header('优惠券列表')
-            ->description('优惠券列表')
-            ->body($this->grid());
+            ->header('Detail')
+            ->description('description')
+            ->body($this->detail($id));
+    }
+
+    /**
+     * Edit interface.
+     *
+     * @param mixed   $id
+     * @return Content
+     */
+    public function edit($id)
+    {
+        return Admin::content(function (Content $content) use ($id) {
+            $content->header('编辑优惠券');
+            $content->body($this->form()->edit($id));
+        });
+    }
+
+    public function create()
+    {
+        return Admin::content(function (Content $content) {
+            $content->header('新增优惠券');
+            $content->body($this->form());
+        });
     }
 
     /**
@@ -36,47 +67,54 @@ class CouponCodesController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new CouponCode);
+        return Admin::grid(CouponCode::class, function (Grid $grid) {
+            // 默认按创建时间倒序排序
+            $grid->model()->orderBy('created_at', 'desc');
+            $grid->id('ID')->sortable();
+            $grid->name('名称');
+            $grid->code('优惠码');
+            $grid->description('描述');
+            $grid->column('usage', '用量')->display(function () {
+                return "{$this->used} / {$this->total}";
+            });
+            $grid->enabled('是否启用')->display(function($value) {
+                return $value ? '是' : '否';
+            });
+            $grid->created_at('创建时间');
 
-        $grid->model()->orderBy('created_at','desc');
-        $grid->id('ID')->sortable();
-        $grid->name('名称');
-        $grid->code('优惠码');
-        $grid->description('描述');
-        $grid->column('usage','用量')->display(function($value){
-            return "{$this->used} / {$this->total}";
-        });
-        $grid->enabled('是否启用')->display(function($value){
-            return $value ? '是' : '否';
-        });
-        $grid->created_at('创建时间');
-        $grid->actions(function ($actions) {
-            $actions->disableView();
-        });
-
-        return $grid;
-    }
-
-    public function create(){
-        return Admin::content(function(Content $content){
-            $content->header('新增优惠券');
-            $content->body($this->form());
+            $grid->actions(function ($actions) {
+                $actions->disableView();
+            });
         });
     }
 
-    public function edit($id)
+    /**
+     * Make a show builder.
+     *
+     * @param mixed   $id
+     * @return Show
+     */
+    protected function detail($id)
     {
-        return Admin::content(function (Content $content) use ($id) {
-            $content->header('编辑优惠券');
-            $content->body($this->form()->edit($id));
-        });
+        $show = new Show(CouponCode::findOrFail($id));
+
+
+
+        return $show;
     }
 
-    protected function form(){
+    /**
+     * Make a form builder.
+     *
+     * @return Form
+     */
+    protected function form()
+    {
         return Admin::form(CouponCode::class, function (Form $form) {
             $form->display('id', 'ID');
             $form->text('name', '名称')->rules('required');
-            $form->text('code','优惠码')->rules(function($form){
+            $form->text('code', '优惠码')->rules(function($form) {
+                // 如果 $form->model()->id 不为空，代表是编辑操作
                 if ($id = $form->model()->id) {
                     return 'nullable|unique:coupon_codes,code,'.$id.',id';
                 } else {

@@ -22,18 +22,21 @@
                         @foreach($cartItems as $item)
                             <tr data-id="{{ $item->productSku->id }}">
                                 <td>
-                                    <input type="checkbox" name="select" value="{{ $item->productSku->id }}" {{ $item->productSku->product->on_sale ? 'checked' : 'disabled' }}>
+                                    <input type="checkbox" name="select"
+                                           value="{{ $item->productSku->id }}" {{ $item->productSku->product->on_sale ? 'checked' : 'disabled' }}>
                                 </td>
                                 <td class="product_info">
                                     <div class="preview">
-                                        <a target="_blank" href="{{ route('products.show', [$item->productSku->product_id]) }}">
+                                        <a target="_blank"
+                                           href="{{ route('products.show', [$item->productSku->product_id]) }}">
                                             <img src="{{ $item->productSku->product->image_url }}">
                                         </a>
                                     </div>
                                     <div @if(!$item->productSku->product->on_sale) class="not_on_sale" @endif>
-              <span class="product_title">
-                <a target="_blank" href="{{ route('products.show', [$item->productSku->product_id]) }}">{{ $item->productSku->product->title }}</a>
-              </span>
+                                      <span class="product_title">
+                                        <a target="_blank"
+                                           href="{{ route('products.show', [$item->productSku->product_id]) }}">{{ $item->productSku->product->title }}</a>
+                                      </span>
                                         <span class="sku_title">{{ $item->productSku->title }}</span>
                                         @if(!$item->productSku->product->on_sale)
                                             <span class="warning">该商品已下架</span>
@@ -42,7 +45,9 @@
                                 </td>
                                 <td><span class="price">￥{{ $item->productSku->price }}</span></td>
                                 <td>
-                                    <input type="text" class="form-control input-sm amount" @if(!$item->productSku->product->on_sale) disabled @endif name="amount" value="{{ $item->amount }}">
+                                    <input type="text" class="form-control input-sm amount"
+                                           @if(!$item->productSku->product->on_sale) disabled @endif name="amount"
+                                           value="{{ $item->amount }}">
                                 </td>
                                 <td>
                                     <button class="btn btn-xs btn-danger btn-remove">移除</button>
@@ -51,6 +56,7 @@
                         @endforeach
                         </tbody>
                     </table>
+
                     <div>
                         <form class="form-horizontal" role="form" id="order-form">
                             <div class="form-group">
@@ -89,11 +95,13 @@
                             </div>
                         </form>
                     </div>
+                    <!-- 结束 -->
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
 @section('scriptsAfterJs')
     <script>
         $(document).ready(function () {
@@ -108,27 +116,25 @@
                     icon: "warning",
                     buttons: ['取消', '确定'],
                     dangerMode: true,
-                })
-                    .then(function(willDelete) {
-                        // 用户点击 确定 按钮，willDelete 的值就会是 true，否则为 false
-                        if (!willDelete) {
-                            return;
-                        }
-                        axios.delete('/cart/' + id)
-                            .then(function () {
-                                location.reload();
-                            })
-                    });
+                }).then(function (willDelete) {
+                    // 用户点击 确定 按钮，willDelete 的值就会是 true，否则为 false
+                    if (!willDelete) {
+                        return;
+                    }
+                    axios.delete('/cart/' + id).then(function () {
+                        location.reload();
+                    })
+                });
             });
 
             // 监听 全选/取消全选 单选框的变更事件
-            $('#select-all').change(function() {
+            $('#select-all').change(function () {
                 // 获取单选框的选中状态
                 // prop() 方法可以知道标签中是否包含某个属性，当单选框被勾选时，对应的标签就会新增一个 checked 的属性
                 var checked = $(this).prop('checked');
                 // 获取所有 name=select 并且不带有 disabled 属性的勾选框
                 // 对于已经下架的商品我们不希望对应的勾选框会被选中，因此我们需要加上 :not([disabled]) 这个条件
-                $('input[name=select][type=checkbox]:not([disabled])').each(function() {
+                $('input[name=select][type=checkbox]:not([disabled])').each(function () {
                     // 将其勾选状态设为与目标单选框一致
                     $(this).prop('checked', checked);
                 });
@@ -165,25 +171,23 @@
                 });
                 axios.post('{{ route('orders.store') }}', req)
                     .then(function (response) {
-                        swal('订单提交成功', '', 'success')
-                            .then(()=>{
-                                location.href = '/orders/'+response.data.id;
-                            });
+                        swal('订单提交成功', '', 'success').then(() => {
+                            location.href = '/orders/' + response.data.id;
+                        });
                     }, function (error) {
                         if (error.response.status === 422) {
                             // http 状态码为 422 代表用户输入校验失败
                             var html = '<div>';
                             _.each(error.response.data.errors, function (errors) {
                                 _.each(errors, function (error) {
-                                    html += error+'<br>';
+                                    html += error + '<br>';
                                 })
                             });
                             html += '</div>';
                             swal({content: $(html)[0], icon: 'error'})
-                        } else if(error.response.status === 403){
-                            // 如果返回码是 403，说明有其他条件不满足
+                        } else if (error.response.status === 403) { // 这里判断状态 403
                             swal(error.response.data.msg, '', 'error');
-                        }else{
+                        } else {
                             // 其他情况应该是系统挂了
                             swal('系统错误', '', 'error');
                         }
@@ -227,7 +231,6 @@
                 $('#btn-cancel-coupon').hide(); // 隐藏 取消 按钮
                 $('#btn-check-coupon').show(); // 显示 检查 按钮
             });
-
         });
     </script>
 @endsection
